@@ -10,7 +10,6 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const uploadMiddleware = multer({ dest: 'uploads/' });
 const fs = require('fs');
-require("dotenv").config();
 
 const salt = bcrypt.genSaltSync(10);
 const secret = 'asdfe45we45w345wegw345werjktjwertkj';
@@ -19,13 +18,6 @@ app.use(cors({credentials:true,origin:'http://localhost:3000'}));
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
-
-mongoose.connect(process.env.MONGODB_URI).then(() => {
-  const PORT = process.env.PORT || 8000
-  app.listen(PORT, () => {
-      console.log(`App is Listening on PORT ${PORT}`);
-  })
-});
 
 mongoose.connect('mongodb+srv://fatah:123fabio@cluster0.7oa7ukg.mongodb.net/?retryWrites=true&w=majority');
 
